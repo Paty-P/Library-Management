@@ -1,0 +1,111 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="LibraryManagement.Site" %>
+
+<%--<meta name="viewport" content="width=device-width, initial-scale=1.0">--%>
+<script src="Scripts/jquery-1.10.2.min.js"></script>
+<script src="Scripts/jquery.validate.min.js"></script>
+<script src="Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+<link href="css/pikaday.css" rel="stylesheet" />
+<link href="css/site.css" rel="stylesheet" />
+<link href="css/theme.css" rel="stylesheet" />
+<link href="css/triangle.css" rel="stylesheet" />
+<script src="jquery/pikaday.js"></script>
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <link href="Styles.css" rel="stylesheet" />
+    <style type="text/css">
+        .auto-style1 {
+            height: 500px;
+            width: 1196px;
+            align-content:center;
+        }
+        .auto-style2 {
+            width: 303px;
+            height: 84px;
+        }
+        .auto-style3{
+            width: 303px;
+            height: 50px;
+            align-content:center;
+        }
+        </style>
+    
+</head>
+<body style="height: 100%">
+   
+    <form id="form1" runat="server">
+        <div>
+
+            <table style="font-family: Arial" align="center">
+                <tr>
+                    <td colspan="2" style="height: 80px; text-align: center; background-color:#FFFFFF">
+              
+                    <img src="Images/logo.jpg" align="left"/>    </td>
+                </tr>
+                <tr>
+                    <td style="width: 10%" valign="top">
+
+                        <asp:Menu ID="Menu1" runat="server"   Style="position: page;" ForeColor="Black" Font-Size="Large" >
+                            <StaticMenuStyle CssClass="MenuStyle" />
+                            <StaticMenuStyle BackColor="PaleGoldenrod" />
+                            <StaticMenuItemStyle  BorderColor="Tan" BorderWidth="1px" ItemSpacing="30" VerticalPadding="20px" BorderStyle="Solid" />
+                            <StaticHoverStyle Font-Bold="true" />
+                            <StaticSelectedStyle BackColor="Tan" />
+                            <DynamicMenuStyle BackColor="PaleGoldenrod" />
+                            <DynamicMenuItemStyle BorderColor="Tan" BorderWidth="1px" BorderStyle="Solid" />
+                            <DynamicHoverStyle Font-Bold="true" />
+                            <DynamicSelectedStyle BackColor="Tan" />
+
+                            <Items>
+                                <asp:MenuItem Text="Home" Value="Home" NavigateUrl="~/FirstPage.aspx"></asp:MenuItem>
+                                <asp:MenuItem Text="Books" Value="Books" NavigateUrl="~/SearchBook.aspx">
+                                    <asp:MenuItem Text="Display Books" Value="Display Books" NavigateUrl="~/DisplayBook.aspx"></asp:MenuItem>
+                                    <asp:MenuItem Text="Insert Books" Value="Insert Books" NavigateUrl="~/InsertBook.aspx"></asp:MenuItem>
+                                    <asp:MenuItem Text="Update Books" Value="Update Books" NavigateUrl="~/UpdateBook.aspx"></asp:MenuItem>
+                                    <asp:MenuItem Text="Delete Books" Value="Delete Books" NavigateUrl="~/DeleteBooks.aspx"></asp:MenuItem>
+                                </asp:MenuItem>
+                                <asp:MenuItem Text="Readers" Value="Books" NavigateUrl="~/SearchReaders.aspx">
+                                    <asp:MenuItem Text="Display Readers" Value="Display Readers" NavigateUrl="~/DisplayReaders.aspx"></asp:MenuItem>
+                                    <asp:MenuItem Text="Insert Readers" Value="Insert Readers" NavigateUrl="~/InsertReaders.aspx"></asp:MenuItem>
+                                    <asp:MenuItem Text="Update Readers" Value="Update Readers" NavigateUrl="~/UpdateReaderAndAdress.aspx"></asp:MenuItem>
+                                    <asp:MenuItem Text="Delete Readers" Value="Delete Readers" NavigateUrl="~/DeleteReaders.aspx"></asp:MenuItem>
+                                </asp:MenuItem>
+                                <asp:MenuItem Text="Publishing House" Value="Publishing House" NavigateUrl="~/SearchPublishingHouse.aspx">
+                                    <asp:MenuItem Text="Insert Publishing House" Value="Insert Publishing House" NavigateUrl="~/InsertPublishingHouse.aspx"></asp:MenuItem>
+                                    <asp:MenuItem Text="Update Publishing House " Value="Update Publishing House " NavigateUrl="~/UpdatePbH.aspx"></asp:MenuItem>
+                                </asp:MenuItem>
+                                <asp:MenuItem Text="Authors" Value="Authors" NavigateUrl="~/SearchAuthor.aspx">
+                                    <asp:MenuItem Text="Insert Update Delete Author" Value="Insert Update Delete Author" NavigateUrl="~/InsertUpdateDeleteAuthors.aspx"></asp:MenuItem>
+                                </asp:MenuItem>
+
+                                <asp:MenuItem Text="Rent Book" Value="Rent Book" NavigateUrl="~/SearchRentBook.aspx">
+                                    <asp:MenuItem Text="Insert/Update Rent Book" Value="Insert/Update Rent Book" NavigateUrl="~/InsertUpdateRentBook.aspx"></asp:MenuItem>
+                                    <asp:MenuItem Text="Delete Rent Book" Value="Delete Rent Book" NavigateUrl="~/DeleteRentBook.aspx"></asp:MenuItem>
+                                </asp:MenuItem>
+
+                            </Items>
+                        </asp:Menu>
+
+                    </td>
+                    <td style="background-color: #F0E68C;" class="auto-style1">
+<div align="center">
+                            <asp:ContentPlaceHolder ID="MainContentPlaceHolder" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="background-color: #CD853F; text-align: center">
+                        <b style="animation:ease-in-out">Created by Petrescu Petruta</b>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </form>
+</body>
+</html>

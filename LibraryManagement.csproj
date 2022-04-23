@@ -1,0 +1,345 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{35C63FE8-93D1-47F2-8D88-408D1577D36C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LibraryManagement</RootNamespace>
+    <AssemblyName>LibraryManagement</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\pikaday.css" />
+    <Content Include="css\site.css" />
+    <Content Include="css\theme.css" />
+    <Content Include="css\triangle.css" />
+    <Content Include="ErrorPage.aspx" />
+    <Content Include="Images\descărcare.jfif" />
+    <Content Include="Images\images.png" />
+    <Content Include="Images\library.jpg" />
+    <Content Include="Images\logo.jpg" />
+    <Content Include="Images\Square 4x4.png" />
+    <Content Include="Images\unnamed.png" />
+    <Content Include="jquery\jquery-3.5.1.js" />
+    <Content Include="jquery\jquery-3.5.1.min.js" />
+    <Content Include="jquery\pikaday.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="InsertBook.aspx" />
+    <Content Include="DisplayBook.aspx" />
+    <Content Include="DeleteBooks.aspx" />
+    <Content Include="SearchReaders.aspx" />
+    <Content Include="InsertReaders.aspx" />
+    <Content Include="DeleteReaders.aspx" />
+    <Content Include="DisplayReaders.aspx" />
+    <Content Include="Styles.css" />
+    <Content Include="UpdateBook.aspx" />
+    <Content Include="UpdateReaders.aspx" />
+    <Content Include="InsertRentBook.aspx" />
+    <Content Include="SearchRentBook.aspx" />
+    <Content Include="DeleteRentBook.aspx" />
+    <Content Include="SearchPublishingHouse.aspx" />
+    <Content Include="InsertPublishingHouse.aspx" />
+    <Content Include="UpdatePbH.aspx" />
+    <Content Include="SearchAuthor.aspx" />
+    <Content Include="InsertUpdateDeleteAuthors.aspx" />
+    <Content Include="UpdateReaderAndAdress.aspx" />
+    <Content Include="InsertUpdateRentBook.aspx" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="FirstPage.aspx" />
+    <None Include="packages.config" />
+    <Content Include="Site.Master" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="SearchBook.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ErrorPage.aspx.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPage.aspx.designer.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReadersDataAcsessLayer.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SearchBook.aspx.cs">
+      <DependentUpon>SearchBook.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SearchBook.aspx.designer.cs">
+      <DependentUpon>SearchBook.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FirstPage.aspx.cs">
+      <DependentUpon>FirstPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FirstPage.aspx.designer.cs">
+      <DependentUpon>FirstPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InsertBook.aspx.cs">
+      <DependentUpon>InsertBook.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InsertBook.aspx.designer.cs">
+      <DependentUpon>InsertBook.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DisplayBook.aspx.cs">
+      <DependentUpon>DisplayBook.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DisplayBook.aspx.designer.cs">
+      <DependentUpon>DisplayBook.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteBooks.aspx.cs">
+      <DependentUpon>DeleteBooks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DeleteBooks.aspx.designer.cs">
+      <DependentUpon>DeleteBooks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SearchReaders.aspx.cs">
+      <DependentUpon>SearchReaders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SearchReaders.aspx.designer.cs">
+      <DependentUpon>SearchReaders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InsertReaders.aspx.cs">
+      <DependentUpon>InsertReaders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InsertReaders.aspx.designer.cs">
+      <DependentUpon>InsertReaders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteReaders.aspx.cs">
+      <DependentUpon>DeleteReaders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DeleteReaders.aspx.designer.cs">
+      <DependentUpon>DeleteReaders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DisplayReaders.aspx.cs">
+      <DependentUpon>DisplayReaders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DisplayReaders.aspx.designer.cs">
+      <DependentUpon>DisplayReaders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateBook.aspx.cs">
+      <DependentUpon>UpdateBook.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateBook.aspx.designer.cs">
+      <DependentUpon>UpdateBook.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateReaders.aspx.cs">
+      <DependentUpon>UpdateReaders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateReaders.aspx.designer.cs">
+      <DependentUpon>UpdateReaders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InsertRentBook.aspx.cs">
+      <DependentUpon>InsertRentBook.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InsertRentBook.aspx.designer.cs">
+      <DependentUpon>InsertRentBook.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SearchRentBook.aspx.cs">
+      <DependentUpon>SearchRentBook.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SearchRentBook.aspx.designer.cs">
+      <DependentUpon>SearchRentBook.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteRentBook.aspx.cs">
+      <DependentUpon>DeleteRentBook.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DeleteRentBook.aspx.designer.cs">
+      <DependentUpon>DeleteRentBook.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SearchPublishingHouse.aspx.cs">
+      <DependentUpon>SearchPublishingHouse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SearchPublishingHouse.aspx.designer.cs">
+      <DependentUpon>SearchPublishingHouse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InsertPublishingHouse.aspx.cs">
+      <DependentUpon>InsertPublishingHouse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InsertPublishingHouse.aspx.designer.cs">
+      <DependentUpon>InsertPublishingHouse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdatePbH.aspx.cs">
+      <DependentUpon>UpdatePbH.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdatePbH.aspx.designer.cs">
+      <DependentUpon>UpdatePbH.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SearchAuthor.aspx.cs">
+      <DependentUpon>SearchAuthor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SearchAuthor.aspx.designer.cs">
+      <DependentUpon>SearchAuthor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InsertUpdateDeleteAuthors.aspx.cs">
+      <DependentUpon>InsertUpdateDeleteAuthors.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InsertUpdateDeleteAuthors.aspx.designer.cs">
+      <DependentUpon>InsertUpdateDeleteAuthors.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateReaderAndAdress.aspx.cs">
+      <DependentUpon>UpdateReaderAndAdress.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateReaderAndAdress.aspx.designer.cs">
+      <DependentUpon>UpdateReaderAndAdress.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InsertUpdateRentBook.aspx.cs">
+      <DependentUpon>InsertUpdateRentBook.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InsertUpdateRentBook.aspx.designer.cs">
+      <DependentUpon>InsertUpdateRentBook.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55050</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:55050/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

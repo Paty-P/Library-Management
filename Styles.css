@@ -1,0 +1,48 @@
+﻿
+
+.MenuStyle {
+    background-color: palegoldenrod;
+   
+}
+#PageContainer {
+    position: center;
+    float: left;
+    left: 50%;
+    top: 20px;
+    width: 500px;
+    margin: 0px 0px 0px -250px; /* half of the width */
+}
+
+.MainMenu {
+    border: 1px solid white;
+    border-radius:2px;
+    width: 814px;
+    height: 19px;
+    background-color: #cccccc;
+    text-align:center;
+    padding-right: 50px
+
+}
+    .MainMenu ul li {
+        width: 200px;
+        border-radius:1px;
+
+    }
+div#main1 {
+    width: 330px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+.button {
+    width: 130px;
+    height: 30px;
+    margin-right: 0px;
+    margin-left: 0px;
+    margin-bottom:0px;
+    margin-top:0px;
+}
+.MenuItemstyle {
+    border-radius: 2px;
+    text-align:center;
+}
