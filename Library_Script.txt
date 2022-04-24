@@ -1,0 +1,173 @@
+--create database with tables Library
+
+
+
+
+-------------------------------- create Table tblCarte
+
+create table tblBook
+(
+book_id int primary key identity not null,
+author_id int not null,
+publishing_house_id int not null,
+title nvarchar (100) not null,
+number_copies tinyint not null,
+published_date date,
+domain_id int not null,
+[language] int not null,
+registration_date date not null,
+price smallmoney
+)
+
+---------------------------------------create Table tblLanguage
+create table tblLanguage
+(
+language_id int primary key identity,
+language_name nvarchar(20)
+)
+
+------------------------------------create Table tblPublishingHouse
+create table tblPublishingHouse
+(
+publishing_house_id int identity primary key not null,
+adress_id int,
+name nvarchar(100) not null,
+phone_number varchar (10)
+)
+
+
+-----------------------------------------create Table tblAuthor
+create table  tblAuthor
+ (
+ author_id int identity primary key not null,
+ first_name nvarchar(50) not null,
+ last_name nvarchar(50),
+ date_of_birth date
+ )
+
+
+ -------------------------------------create Table tblDomain
+ create table tblDomain
+ (
+ domain_id int identity primary key not null,
+ name nvarchar(50) not null
+ )
+
+ -----------------------------------------create Table tblAdress
+
+create table tblAdress
+(
+adress_id int identity primary key not null,
+country nvarchar (50) not null,
+region nvarchar(50) ,
+city nvarchar (50) not null,
+street nvarchar (50),
+number varchar (10),
+block varchar(10),
+apartment varchar(10),
+[floor] int,
+postal_code varchar (15) 
+)
+
+
+---------------------------------------------create Table tblReader
+ create table tblReader
+ (
+ reader_id int identity primary key  not null,
+ personal_identification_number varchar(13) unique  not null,
+ adress_id int not null,
+ first_name nvarchar(50) not null,
+ last_name nvarchar(50),
+ gender_id int not null,
+ email nvarchar(50),
+ phone_number char (10)
+ )
+ 
+
+ -------------------------------------create Table tblGender
+create table tblGender
+ (
+ gender_id int primary key identity not null,
+ gender_name nvarchar (10) not null
+ )
+
+ ---------------------------------------create Table tblRentBook
+ create table tblRentBook
+ (
+ rent_id int identity primary key  not null,
+ reader_id int not null,
+ book_id int not null,
+ registration_number int not null,
+ borrow_date date not null,
+ return_date  date ,
+ [status] bit not null
+ )
+
+
+ -------------------------------------------------create Table tblInventory
+ create table tblInventory
+ (
+  registration_number int identity primary key not null,
+  book_id int not null,
+ )
+
+
+ /*********************************  CONSTRAINTS  ********************************************/
+
+
+ -----------------------create constraints tblBook
+Alter table tblBook
+add constraint tblBook_author_id_FK FOREIGN KEY (author_id) references tblAuthor(author_id)
+
+
+Alter table tblBook
+add constraint tblBook_publishing_house_id_FK FOREIGN KEY (publishing_house_id) references tblPublishingHouse(publishing_house_id)
+
+Alter table tblBook
+add constraint tblBook_domain_id_FK FOREIGN KEY (domain_id) references tblDomain(domain_id)
+
+Alter table tblBook
+add constraint tblBook_language_FK FOREIGN KEY (language) references tblLanguage(language_id)
+
+
+------------------------create constraints tblPublishingHouse
+alter table tblPublishingHouse
+add constraint chk_tblPublishingHouse_phone CHECK (phone_number not like '%[^0-9]%' and len(phone_number)= 10) -- verifica daca nr nu este cifra 
+
+
+Alter table tblPublishingHouse
+add constraint tblPublishingHouse_adress_id_FK FOREIGN KEY (adress_id) references tblAdress(adress_id)
+
+
+ ------------------------create constraints tblReader
+ alter table tblReader
+ add constraint chk_tblReader_phone_number CHECK (phone_number not like '%[^0-9]%' and len(phone_number)= 10) -- verifica daca nr nu este cifra
+
+ Alter table tblReader
+add constraint tblReader_adress_id_FK FOREIGN KEY (adress_id) references tblAdress(adress_id)
+
+alter table tblReader
+ADD CONSTRAINT CK_tblReader_CHECK_PIN check (len(personal_identification_number)= 13 and  isnumeric(personal_identification_number)= 1)
+
+ Alter table tblReader
+add constraint tblReader_gender_id_FK FOREIGN KEY (gender_id) references tblGender(gender_id)
+
+---------------------create constraints tblRentBook 
+Alter table tblRentBook
+add constraint tblRentBook_reader_id_FK FOREIGN KEY (reader_id) references tblReader( reader_id)
+
+Alter table tblRentBook
+add constraint tblRentBook_book_id_FK FOREIGN KEY (book_id) references tblBook( book_id)
+
+
+Alter table tblRentBook
+add constraint tblRentBook_registration_number_FK FOREIGN KEY (registration_number) references tblInventory(registration_number)
+
+alter table tblRentBook----constrangere default pentru coloana status: default 0
+add constraint df_tblRentBook__status
+default 0 for [status]
+
+
+----------------------create constraints tblInventory
+Alter table tblInventory
+add constraint tblInventory_book_id_FK FOREIGN KEY (book_id) references tblBook(book_id)

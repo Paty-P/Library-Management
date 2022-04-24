@@ -1,0 +1,512 @@
+*************************************************************************************************
+
+--------procedure spSearchBookByAuthorName
+CREATE  procedure [dbo].[spSearchBookByAuthorName]
+@authorName nvarchar (100)
+as
+--declare @name = first_name +'' + last_name
+select a.author_id, Authorname, b.title, c.registration_number
+from tblauthor as a 
+join tblbook  as b on a.author_id = b.author_id
+join tblInventory as c on b.book_id = c.book_id
+where  Authorname like  @authorName 
+
+exec [spSearchBookByAuthorName] @authorName ='Ion Creanga'
+
+/****** Object:  StoredProcedure [dbo].[spAuthorName]    Script Date: 29.01.2021 16:17:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[spAuthorName]
+ as  
+ select  Authorname, author_id
+ from tblAuthor
+ 
+GO
+
+/****** Object:  StoredProcedure [dbo].[spBookDetails]    Script Date: 29.01.2021 16:19:05 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[spBookDetails]
+@book_name nvarchar (100)
+as
+
+select b.book_id,a.registration_number, b.title, c.first_name,c.last_name, a.[status]
+from tblRentBook as a
+join tblBook  as b on a.book_id=b.book_id
+join tblAuthor as c on c.author_id = b.author_id
+where b.title = @book_name
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[spDetailAuthor]    Script Date: 29.01.2021 16:19:27 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[spDetailAuthor]
+@authorName nvarchar (100)
+as
+--declare @name = first_name +'' + last_name
+select a.author_id, Authorname, b.title, c.[status], c.registration_number
+from tblauthor as a 
+join tblbook  as b on a.author_id = b.author_id
+join tblRentBook as c on b.book_id = c.book_id
+where  Authorname= @authorName
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[spInsertBook]    Script Date: 29.01.2021 16:19:55 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE proc [dbo].[spInsertBook]
+
+@author_id int,
+@publishing_house_id int,
+@title nvarchar(100),
+@number_copies tinyint,
+@published_date date,
+@domain_id int,
+@language int,
+@registration_date date,
+@price smallmoney
+as
+insert into tblBook(  [author_id], [publishing_house_id] ,[title],[number_copies] ,[published_date],
+ [domain_id],[language], [registration_date],[price] ) 
+values ( @author_id,@publishing_house_id,@title,@number_copies, @published_date,
+ @domain_id, @language, @registration_date , @price )
+GO
+
+/****** Object:  StoredProcedure [dbo].[spListBookAfterDate]    Script Date: 29.01.2021 16:20:21 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[spListBookAfterDate]
+@borrow_date  date
+as
+select b.book_id,a.registration_number, b.title, c.first_name,c.last_name
+from tblRentBook as a
+join tblBook  as b on a.book_id=b.book_id
+join tblAuthor as c on c.author_id = b.author_id
+where a.borrow_date = @borrow_date
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[spListBookAfterTitle]    Script Date: 29.01.2021 16:20:41 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[spListBookAfterTitle] @Title nvarchar(100)
+AS
+select bk.book_id, bk.title as Title, au.first_name + ' ' +au.last_name as Author,
+		pu.name as Publishing, do.name as Domain, la.language_name as Language,
+		bk.price as Price, bk.number_copies as Copies, 
+		convert (varchar,bk.published_date,104) as 'Publishing Date'
+from tblBook bk
+inner join tblAuthor au on bk.author_id = au.author_id
+inner join tblPublishingHouse pu on bk.publishing_house_id = pu.publishing_house_id
+inner join tblDomain do on bk.domain_id = do.domain_id
+inner join tblLanguage la on bk.[language] = la.language_id 
+where title like @Title
+GO
+
+
+
+***********************************************************
+-------create procedure spSearchByReaderName
+go
+create procedure spSearchByReaderName
+@first_name nvarchar(50),
+@last_name nvarchar(50)
+as 
+
+select reader_id, first_name,last_name,  personal_identification_number, email, phone_number
+from tblReader
+where first_name= @first_name and last_name = @last_name 
+
+---drop procedure spSearchByReaderName
+
+
+execute  spSearchByReaderName @first_name = 'Mihai', @last_name ='Alexandru'
+*************************************
+------create procedure spSearchByReaderCNP
+alter proc spSearchByReaderCNP
+@CNP varchar(13)
+as
+select  reader_id, personal_identification_number,  first_name, last_name, email, phone_number
+from tblReader
+where personal_identification_number = @CNP
+
+execute spSearchByReaderCNP @CNP = '1751478453459'
+***********************
+
+//-------create procedure spInsertReaders
+alter proc spInsertReaders
+
+--@reader_id int,
+@CNP varchar(13),
+@adress_id int,
+@first_name nvarchar(50),
+@last_name nvarchar(50),
+@gender_id int,
+@email nvarchar(50),
+@phone_number char(10)
+as
+insert into tblReader(  [personal_identification_number],[adress_id],[first_name], [last_name],[gender_id] ,
+[email],[phone_number] ) 
+values ( @CNP, @adress_id, @first_name, @last_name, @gender_id, @email , @phone_number)
+GO
+
+execute spInsertReaders  @CNP = '2878615211228', @adress_id= 7, @first_name = 'Dumitru', @last_name = 'Ion',
+ @gender_id= 1, @email = 'john@yahoo.com', @phone_number = '0748467789'
+********************************************************************************
+// create procedure spInsertReadersAndAdress
+Create proc spInsertReadersAndAdress
+
+--@reader_id int,
+@CNP varchar(13),
+@adress_id int,
+@first_name nvarchar(50),
+@last_name nvarchar(50),
+@gender_id int,
+@email nvarchar(50),
+@phone_number char(10),
+@country nvarchar(50),
+@region nvarchar (50),
+@city nvarchar (50),
+@street nvarchar (50),
+@street_number varchar (10),
+@block varchar(10),
+@apartment varchar(10),
+@floor int,
+@postal_code varchar(15)
+as
+declare @adressID int
+
+
+insert into tblAdress ( [country],[region] ,[city],[street],[number],[block],[apartment],[floor],[postal_code])
+values (@country,@region, @city,@street, @street_number,@block, @apartment, @floor,@postal_code)
+SELECT @adress_ID = scope_identity()
+insert into tblReader(  [personal_identification_number],[adress_ID],[first_name], [last_name],[gender_id] ,
+[email],[phone_number] ) 
+values ( @CNP, @adress_id, @first_name, @last_name, @gender_id, @email , @phone_number)
+GO
+
+
+
+execute spInsertReadersAndAdress @CNP = '2878645711228', @adress_id= 7, @first_name = 'Dumitru', @last_name = 'Ion',
+ @gender_id= 1, @email = 'john@yahoo.com', @phone_number = '0748467789',
+  @country= 'Romania',@region= Bucuresti, @city= Sector3,@street= 'Fetesti', @street_number=15,
+  @block= '46', @apartment= 17, @floor= 6 ,@postal_code = '802478'
+
+************************************************************************
+----create procedure spListBookAfterTitle
+
+Alter PROCEDURE spListBookAfterTitle @Title nvarchar(100)
+AS
+select bk.book_id, bk.title as Title, au.first_name + ' ' +au.last_name as Author,
+		pu.name as Publishing, do.name as Domain, la.language_name as Language,
+		bk.price as Price, bk.number_copies as Copies, 
+		convert (varchar,bk.published_date,104) as 'Publishing Date',
+		convert (varchar,bk.registration_date,104) as 'Registration Date'
+from tblBook bk
+inner join tblAuthor au on bk.author_id = au.author_id
+inner join tblPublishingHouse pu on bk.publishing_house_id = pu.publishing_house_id
+inner join tblDomain do on bk.domain_id = do.domain_id
+inner join tblLanguage la on bk.[language] = la.language_id 
+where title like @Title
+GO;
+exec spListBookAfterTitle @Title='Morometii'
+
+----create procedure update tblBook
+
+CREATE PROCEDURE spUpdateBook 
+@BookId int,
+@Title nvarchar(100),
+@Author int,
+@Publishing int,
+@Domain int,
+@Language int,
+@Price smallmoney,
+@Copies tinyint,
+@PublishingDate date,
+@RegistrationDate date
+AS
+update tblBook set 
+author_id = @Author,
+publishing_house_id = @Publishing,
+title = @Title,
+number_copies = @Copies,
+published_date = @PublishingDate,
+domain_id = @Domain,
+[language] = @Language,
+registration_date = @RegistrationDate,
+price = @Price
+where book_id = @BookId
+*********************************************************************************************************
+--------create procedure spInsertRentBook
+alter proc spInsertRentBook
+--@rent_id int,
+@reader_id int,
+@book_id int,
+@registration_number int,
+@borrow_date date,
+@return_date date,
+@status bit
+as
+
+select *from tblReader
+insert into tblRentBook ([reader_id], [book_id],[registration_number],[borrow_date],[return_date],[status])
+values (@reader_id ,@book_id, @registration_number,@borrow_date ,@return_date ,@status)
+
+GO
+*****************************************************************
+----create procedure sp_RetrieveBookId
+Create procedure sp_RetrieveBookId
+ @registration_number int
+ as
+ select book_id from tblInventory 
+ 
+ where registration_number= @registration_number 
+
+ Exec sp_RetrieveBookId '3'
+**************************************************************** 
+go
+-----create procedure spRetrieveReaderId
+ create procedure spRetrieveReaderId
+ @CNP varchar(13)
+ as
+ select reader_id, first_name +' ' + last_name as Name
+ from tblReader
+ where personal_identification_number = @CNP
+
+
+Execute spRetrieveReaderId @cnp ='2820715211229'
+*******************************************************************
+----create procedure search  after CNP the Reader Rent Book
+
+//cautare dupa cnp a fisei de imprumut a cititorului
+CREATE proc [dbo].[spRetrieveReaderRentBooks]
+@CNP varchar(13)
+as
+select rd.first_name,rd.last_name, rd.phone_number, 
+ b.title,a.Authorname,rb.registration_number, rb.borrow_date, rb.return_date, rb.status
+from tblreader RD
+join tblRentBook RB
+on rd.reader_id = RB.reader_id
+join tblBook B
+on b.book_id = rb.book_id
+join tblAuthor A
+on b.author_id = a.author_id
+where personal_identification_number= @CNP
+
+GO
+**********************************************************************
+---create procedure spSearchByPublishingHouseName
+create proc spSearchByPublishingHouseName
+@name_publishing nvarchar (50)
+as
+select b.title as 'Book title',a.Authorname as 'Author name', p.name as 'Publishing house name', d.name as 'Domain name', l.language_name as 'Language',b.number_copies as 'Total number of copies'
+from tblPublishingHouse as p
+join tblBook as b on p.publishing_house_id = b.publishing_house_id
+join tblDomain as d on b.domain_id = d.domain_id
+join tblLanguage as l on b.language = l.language_id
+join tblAuthor as a on b.author_id = a.author_id
+where p.name = @name_publishing
+
+
+exec spSearchByPublishingHouseName 'Timpuri'
+*****************************************************************************
+
+
+-----create  procedure spSearchByAuthorAndStatusBook
+alter  procedure [dbo].spSearchByAuthorAndStatusBook
+@authorName nvarchar (100)
+as
+--declare @name = first_name +'' + last_name
+select a.author_id, Authorname, b.title, c.registration_number
+from tblauthor as a 
+join tblbook  as b on a.author_id = b.author_id
+join tblInventory as c on b.book_id = c.book_id
+join tblRentBook as d on b.book_id = c.book_id
+where  Authorname= @authorName and  d.status != 1
+
+exec spSearchByAuthorAndStatusBook @authorName = 'George Cosbuc'
+*******************************************************************************************
+----create procedure spInsertBookAndInventory
+go
+alter proc [dbo].[spInsertBookAndInventory]
+ @author_id int,
+@publishing_house_id int,
+@title nvarchar(100),
+@number_copies tinyint,
+@published_date date,
+@domain_id int,
+@language int,
+@registration_date date,
+@price smallmoney,
+@book_id int
+ 
+ as 
+ insert into tblBook(  [author_id], [publishing_house_id] ,[title],[number_copies] ,[published_date],
+ [domain_id],[language], [registration_date],[price] ) 
+values ( @author_id,@publishing_house_id,@title,@number_copies, @published_date,
+ @domain_id, @language, @registration_date , @price )
+ SELECT  @book_ID = scope_identity()
+ DECLARE @count INT;
+SET @count = 1;
+    
+WHILE @count<= @number_copies
+BEGIN
+  insert into tblInventory(book_id) values (@book_id)
+   SET @count = @count + 1;
+END;
+
+exec  [spInsertBookAndInventory] @author_id =1, @publishing_house_id= 2, @title= 'Plumb', @number_copies =2, 
+  @published_date = '2021-03-02', @domain_id =2, @language =2, @registration_date ='2021-03-20', @price=11, @book_id=29
+ 
+ 
+********************************************************************************************
+-----create procedure spUpdateReaderAndAdress
+USE [DbLibrary]
+GO
+/****** Object:  StoredProcedure [dbo].[spUpdateReaderAndAdress]    Script Date: 11.03.2021 16:10:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER proc [dbo].[spUpdateReaderAndAdress]
+@reader_id int,
+@cnp varchar(13),
+@adress_id int,
+@first_name nvarchar(50),
+@last_name nvarchar(50),
+@gender_id int,
+@email nvarchar(50),
+@phone_number char(10),
+@country nvarchar(50),
+@region nvarchar (50),
+@city nvarchar (50),
+@street nvarchar (50),
+@street_number varchar (10),
+@block varchar(10),
+@apartment varchar(10),
+@floor int,
+@postal_code varchar(15)
+
+as
+begin
+--declare @IDAdress int
+--set @adress_id=@IDAdress
+update tblAdress
+set 
+
+[country]=@country,
+[region]= @region,
+[city]= @city,
+[street]= @street,
+[number]= @street_number,
+[block]=@block,
+apartment=@apartment,
+[floor]= @floor,
+[postal_code]=@postal_code
+where adress_id= @adress_ID 
+
+--SELECT @adress_ID = scope_identity()
+update tblReader
+set
+[personal_identification_number]=@cnp,
+[adress_id]= @adress_ID,
+[first_name]= @first_name,
+[last_name]= @last_name,
+[gender_id]= @gender_id,
+[email]= @email,
+[phone_number]=@phone_number
+WHERE reader_id=@reader_id
+end
+
+  exec [spUpdateReaderAndAdress]  @reader_id=31, @cnp= '2850715211228', @adress_id=38 ,@first_name= 'Popescu',
+  @last_name ='Ionela',@gender_id=1 ,
+@email='pi@yahoo.com' ,@phone_number='0721446987',@country ='Romania',@region= 'Buzau' ,@city='Negresti'
+ ,@street ='Magurele',@street_number=2 ,@block= 'V6' ,@apartment= 23 ,@floor =5,@postal_code =125874
+
+*************************************************************************************************************
+----create procedure spUpdatePublishingHouseAndAdress
+GO
+alter proc [dbo].[spUpdatePublishingHouseAndAdress]
+@ph_id int,
+@adress_id int,
+@name nvarchar(50),
+@phone_number char(10),
+@country nvarchar(50),
+@region nvarchar (50),
+@city nvarchar (50),
+@street nvarchar (50),
+@street_number varchar (10),
+@block varchar(10),
+@apartment varchar(10),
+@floor int,
+@postal_code varchar(15)
+
+as
+begin
+
+update tblAdress
+set 
+
+[country]=@country,
+[region]= @region,
+[city]= @city,
+[street]= @street,
+[number]= @street_number,
+[block]=@block,
+apartment=@apartment,
+[floor]= @floor,
+[postal_code]=@postal_code
+where adress_id= @adress_ID 
+
+
+update tblPublishingHouse
+set
+
+adress_id =@adress_id,
+name= @name, 
+phone_number= @phone_number 
+WHERE publishing_house_id=@ph_id
+end
+
+exec [spUpdatePublishingHouseAndAdress]  @ph_id=3, @adress_id=38 ,@name= 'Delfin'
+ ,@phone_number='0721446987',@country ='Romania',@region= 'Prahova' ,@city='Ploiesti'
+ ,@street ='Magurele',@street_number=2 ,@block= 'V6' ,@apartment= 23 ,@floor =5,@postal_code =125874
+******************************************************************************************************
+----create procedure spDeletePublishingHouseAndAdress
+go
+ alter procedure spDeletePublishingHouseAndAdress
+ @ph_id int,
+ @adress_id int
+ as
+ begin
+ delete from tblPublishingHouse where publishing_house_id= @ph_id
+ delete from tblAdress where adress_id=@adress_id
+ end
+ exec spDeletePublishingHouseAndAdress @ph_id=2, @adress_id=2 
+*********************************************************
